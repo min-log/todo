@@ -19,8 +19,8 @@
                 </span>
                 <span>@ ${dto.writer}</span>
             </p>
-            <div class="flex_between">
-                <p class="title">
+            <div class="flex_between mb-4">
+                <p class="title m-0">
                     ${dto.title}
                 </p>
                 <a href="javascript:btnFinished(${dto.tno})" class="btn_finished
@@ -36,19 +36,19 @@
         </div>
     </div>
     <script>
-        function btnFinished(data){
+        function btnFinished(e){
 
-            console.log(data);
-            item = {
-                tno: data
-            }
+            console.log(e);
             $.ajax({
-                url:'/api/finished',
-                type:'post',
-                data : item,
-                contentType:'json',
+                url:'/api/finished?tno='+e,
+                type:'get',
+                dataType:'json',
+                async:false,
+                data : {tno: e},
                 success:function(data){
-                    console.log(data);
+                    console.log("success")
+                    console.log("response : "+data);
+
                 },
                 error:function(data){
                     console.log(data);

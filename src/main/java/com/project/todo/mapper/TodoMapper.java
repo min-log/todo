@@ -1,6 +1,7 @@
 package com.project.todo.mapper;
 
 import com.project.todo.domain.TodoVO;
+import com.project.todo.dto.PageRequestDTO;
 import com.project.todo.dto.TodoDTO;
 
 import java.util.List;
@@ -16,4 +17,9 @@ public interface TodoMapper {
     void update(TodoVO todoVO);
 
     void updateFinished(TodoVO todoVO);
+
+    List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
+    
+    //총 게시물 수
+    int getCount(PageRequestDTO pageRequestDTO);
 }

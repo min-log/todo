@@ -30,8 +30,13 @@
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="writer">finished</label>
+
+
                 <div class="col-sm-10">
-                    <input type="checkbox" name="finished" ${dto.finished?"checked":""} >
+                    <label for="finished" class="check_box ms-2">
+                        <input type="checkbox" name="finished" id="finished" ${dto.finished?"checked":""}>
+                        <em class="icon_ck"></em> 완료 여부
+                    </label>
                 </div>
             </div>
             <div class="mb-3">

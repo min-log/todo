@@ -9,7 +9,7 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h6 class="border-bottom pb-2 mb-0">todo list</h6>
 
-    <c:forEach items="${dtoList}" var="dto">
+    <c:forEach items="${responseDTO.dtoList}" var="dto">
         <div class="item d-flex text-body-secondary pt-3">
             <a href="" class="btn_finished
                 <c:if test="${dto.finished == true}"> active</c:if> ">
@@ -34,12 +34,54 @@
             </div>
         </div>
     </c:forEach>
-        <small class="d-block text-end mt-3">
-            <a href="#">All updates</a>
-        </small>
+
+        <div class="float-end mt-4">
+            <ul class="pagination flex-wrap">
+                <c:if test="${responseDTO.prev}">
+                    <li class="page-item">
+                        <a class="page-link" data-num="${responseDTO.start -1}">Previous</a>
+                    </li>
+                </c:if>
+                <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+                    <li class="page-item">
+                        <a class="page-link" data-num="${num}" >${num}</a>
+                    </li>
+                </c:forEach>
+                <c:if test="${responseDTO.next}">
+                    <li class="page-item">
+                        <a class="page-link"  data-num="${responseDTO.end + 1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
     </div>
 
+
 </section>
+
+
+<script>
+
+
+    document.querySelector(".pagination").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+
+        if(target.tagName !== 'A') {
+            return
+        }
+        const num = target.getAttribute("data-num")
+
+        self.location = `/todo/list?page=\${num}` //백틱(` `)을 이용해서 템플릿 처리
+    },false)
+
+
+</script>
+
+
 <script type="text/javascript">
     //전달 받은 메시지가 존재 할 때 팝업
     <c:if test="${msg != null}">

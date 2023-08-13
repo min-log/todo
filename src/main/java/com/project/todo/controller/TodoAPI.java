@@ -4,6 +4,7 @@ import com.project.todo.dto.TodoDTO;
 import com.project.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class TodoAPI {
     private final TodoService todoService;
 
-    @PostMapping("/finished")
-    public ResponseEntity<Boolean> modifyFinish(@RequestBody TodoDTO todoDTO){
+    @GetMapping("/finished")
+    public ResponseEntity<Boolean> modifyFinish(@Param("tno") Long tno){
 
-        log.info("tno : {}",todoDTO);
-        log.info("tno : {}",todoDTO.getTno());
-
-//        boolean result = todoService.modifyFinish(tno);
-//        log.info("전달할 값 : {}",result);
-        return new ResponseEntity<>(true, HttpStatus.OK);
+        log.info("tno : {}",tno);
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 }

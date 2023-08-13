@@ -1,5 +1,7 @@
 package com.project.todo.controller;
 
+import com.project.todo.dto.PageRequestDTO;
+import com.project.todo.dto.PageResponseDTO;
 import com.project.todo.dto.TodoDTO;
 import com.project.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
@@ -27,12 +30,24 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/list")
-    public void list(Model model, HttpServletRequest request){
+    public void list(@Valid PageRequestDTO pageRequestDTO,
+                     BindingResult bindingResult,
+                     Model model,
+                     HttpServletRequest request){
         log.info("todo list ----------------");
+        log.info("pageRequestDTO : {}" ,pageRequestDTO);
 
-        List<TodoDTO> todoList = todoService.getAll();
-        model.addAttribute("dtoList",todoList);
+        if(bindingResult.hasErrors()){
+            pageRequestDTO = PageRequestDTO.builder().build();
+        }
 
+        PageResponseDTO<TodoDTO> list = todoService.getList(pageRequestDTO);
+        log.info("list START: {}", list.getSize());
+        log.info("list END: {}", list.getEnd());
+        model.addAttribute("responseDTO", list);
+
+
+        // 리다이렉트 전달 메시지
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if(flashMap !=null){
             log.info("전달 받은 msg");

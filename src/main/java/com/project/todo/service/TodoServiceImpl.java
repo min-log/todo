@@ -1,6 +1,8 @@
 package com.project.todo.service;
 
 import com.project.todo.domain.TodoVO;
+import com.project.todo.dto.PageRequestDTO;
+import com.project.todo.dto.PageResponseDTO;
 import com.project.todo.dto.TodoDTO;
 import com.project.todo.mapper.TodoMapper;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,25 @@ public class TodoServiceImpl implements TodoService {
         List<TodoDTO> todoDTOList = todoVOList.stream().map(i -> modelMapper.map(i, TodoDTO.class)).collect(Collectors.toList());
         return todoDTOList;
     }
+
+    @Override
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        List<TodoDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, TodoDTO.class))
+                .collect(Collectors.toList());
+
+        int total = todoMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<TodoDTO> pageResponseDTO = PageResponseDTO.<TodoDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
+    }
+
 
     @Override
     public TodoDTO getOne(Long tno) {
