@@ -62,6 +62,7 @@
     </select>
     <select id="getCount" resultType="int">
         select count(tno) from tbl_todo
+        <include refid="search"></include>
     </select>
 
 

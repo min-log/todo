@@ -6,6 +6,8 @@ import com.project.todo.dto.TodoDTO;
 import com.project.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,8 +44,6 @@ public class TodoController {
         }
 
         PageResponseDTO<TodoDTO> list = todoService.getList(pageRequestDTO);
-        log.info("list START: {}", list.getSize());
-        log.info("list END: {}", list.getEnd());
         model.addAttribute("responseDTO", list);
 
 
@@ -58,6 +58,7 @@ public class TodoController {
     @GetMapping("/register")
     public void registerGet(){
         log.info("todo  register----------------");
+
     }
 
 
@@ -81,10 +82,19 @@ public class TodoController {
 
 
     @GetMapping({"/read","/modify"})
-    public void read(Long tno, Model model){
+    public void read(Long tno, Model model,HttpServletRequest request){
         log.info("read ------------------");
         TodoDTO todoDTO = todoService.getOne(tno);
         model.addAttribute("dto",todoDTO);
+
+
+        // 리다이렉트 전달 메시지
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if(flashMap !=null){
+            log.info("전달 받은 msg");
+            model.addAttribute("msg",flashMap.get("message"));
+        }
+
     }
 
 
@@ -116,6 +126,21 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
+
+
+
+    @GetMapping("/finished")
+    public String modifyFinish(@RequestParam("tno") Long tno,
+                               RedirectAttributes redirectAttributes){
+        log.info("tno : {}",tno);
+        boolean result = todoService.modifyFinish(tno);
+        if (result == true){
+            redirectAttributes.addFlashAttribute("message","일정이 완료되었습니다.");
+        }else {
+            redirectAttributes.addFlashAttribute("message","일정 완료가 취소 되었습니다.");
+        }
+        return "redirect:/todo/read?tno="+tno;
+    }
 
 
 

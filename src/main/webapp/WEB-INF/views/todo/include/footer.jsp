@@ -1,6 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Modal -->
+<script type="text/javascript">
+    //전달 받은 메시지가 존재 할 때 팝업
+    <c:if test="${msg != null}">
+    $(function () {
+        $("#msgModal").modal("show");
+        document.querySelector(".modal-body").innerHTML = "<p>${msg}</p>";
+    });
+    </c:if>
+</script>
 <div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -7,7 +7,7 @@
 <c:import url="include/header.jsp"/>
 <section class="container mt-4 mb-4">
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <h6 class="border-bottom pb-2 mb-4">todo register</h6>
+        <h6 class="border-bottom pb-2 mb-4">todo modify</h6>
         <form method="post" action="/todo/modify">
             <input type="text" value="${dto.tno}" name="tno" hidden>
             <div class="row mb-3">

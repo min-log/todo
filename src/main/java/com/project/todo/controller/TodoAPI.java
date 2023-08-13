@@ -18,8 +18,7 @@ public class TodoAPI {
 
     @GetMapping("/finished")
     public ResponseEntity<Boolean> modifyFinish(@Param("tno") Long tno){
-
         log.info("tno : {}",tno);
-        return new ResponseEntity<>(true,HttpStatus.OK);
+        return ResponseEntity.ok(true);
     }
 }

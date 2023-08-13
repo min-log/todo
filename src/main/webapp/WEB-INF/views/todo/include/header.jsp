@@ -18,17 +18,17 @@
 <header class="p-3 text-bg-dark">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/todo/register" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <a href="/todo/register" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none logo">
                 Todo
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/todo/list" class="nav-link px-2 text-white">List</a></li>
                 <li><a href="/todo/register" class="nav-link px-2 text-white">Register</a></li>
             </ul>
-            <form action="/todo/list" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" id="headerSearch">
+            <form action="/todo/list" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" id="headerSearch">
                 <input type="hidden" name="size" value="${pageRequestDTO.size}">
                 <div class="d-flex">
-                    <input type="search" name="keyword" class="form-control form-control-dark text-bg-dark ms-2" placeholder="Search..." aria-label="Search">
+                    <input type="text" name="keyword" class="form-control form-control-dark text-bg-dark ms-2" placeholder="검색어를 입력하세요." >
                     <button type="submit" class="btn btn-primary ms-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart-fill" viewBox="0 0 16 16">
                             <path d="M6.5 13a6.474 6.474 0 0 0 3.845-1.258h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.008 1.008 0 0 0-.115-.1A6.471 6.471 0 0 0 13 6.5 6.502 6.502 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13Zm0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
@@ -42,14 +42,14 @@
                     </button>
                 </div>
                 <div class=" mt-2">
-                    <input type="date" class="form-control">
-                    <input type="date" class="form-control ms-2">
+                    <input type="date" name="from" class="form-control" placeholder="시작일">
+                    <input type="date" name="to" class="form-control ms-2" placeholder="종료일">
                     <label for="searchT" class="check_box ms-2">
-                        <input type="checkbox" name="type" value="t" id="searchT">
+                        <input type="checkbox" name="types" value="t" id="searchT">
                         <em class="icon_ck"></em> 제목
                     </label>
                     <label for="searchW" class="check_box ms-2">
-                        <input type="checkbox" name="type" value="W" id="searchW">
+                        <input type="checkbox" name="types" value="w" id="searchW">
                         <em class="icon_ck"></em> 작성자
                     </label>
                     <label for="searchF" class="check_box ms-2">

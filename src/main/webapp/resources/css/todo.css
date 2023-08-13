@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+* {font-family: 'Pretendard-Regular' !important;}
+header .logo {color: #0d6efd !important;}
+header .logo,
+h6 {font-size:20px;font-family: 'KBO-Dia-Gothic_bold' !important;}
+header .nav {font-size:16px !important;margin:0 10px}
+header .nav li {position: relative;}
+header .nav li + li {margin-left:10px;}
+header .nav li+li:after {content: '';width: 5px;height: 5px;background:#0d6efd;border-radius:50%;position: absolute;top: 50%;left: -8px;transform: translate(0,-50%);}
 .btn_finished {display: inline-block;width:26px;height:26px;margin-right:15px;position:relative;border:1px solid #ccc;vertical-align: middle;box-sizing: border-box;background:#fff;border-radius:5px;box-sizing:border-box}
 .btn_finished:before,
 .btn_finished:after {content:'';display:block;height:0px;width: 3px;background:#000;position:absolute;transform-origin:left top;border-radius:5px;}
@@ -18,9 +38,12 @@
 #headerSearch input {color: #fff;}
 #headerSearch input {background:none}
 #headerSearch input[type="date"] {width: 150px;display:inline-block}
+#headerSearch input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
 #headerSearch .check_box .icon_ck {background:#212529;border:1px solid #ffff;}
 #headerSearch .check_box > input:checked + .icon_ck {background:#f9f9f9;}
-
+#headerSearch input::placeholder {color:#fff}
 .check_box {line-height:37px;position:relative;display: inline-block;box-sizing: border-box;vertical-align: middle;cursor:pointer;}
 .check_box input[type=checkbox] {position: absolute;z-index: -1;}
 .check_box .icon_ck {display: inline-block;width:26px;height:26px;position:relative;border:1px solid #ccc;vertical-align: middle;box-sizing: border-box;background:#fff;position:relative;border-radius:5px;}

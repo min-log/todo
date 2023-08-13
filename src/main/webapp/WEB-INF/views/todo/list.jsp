@@ -11,12 +11,12 @@
 
     <c:forEach items="${responseDTO.dtoList}" var="dto">
         <div class="item d-flex text-body-secondary pt-3">
-            <a href="" class="btn_finished
+            <a href="/todo/finished?tno=${dto.tno}" class="btn_finished
                 <c:if test="${dto.finished == true}"> active</c:if> ">
             </a>
             <div class="item-con pb-3 mb-0 small lh-sm border-bottom">
                 <p class="title">
-                    <a href="/todo/read?tno=${dto.tno}">
+                    <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}">
                     ${dto.title}
                     </a>
                 </p>
@@ -81,14 +81,4 @@
 
 </script>
 
-
-<script type="text/javascript">
-    //전달 받은 메시지가 존재 할 때 팝업
-    <c:if test="${msg != null}">
-        $(function () {
-            $("#msgModal").modal("show");
-            document.querySelector(".modal-body").innerHTML = "<p>${msg}</p>";
-        });
-    </c:if>
-</script>
 <c:import url="include/footer.jsp"></c:import>

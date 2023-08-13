@@ -23,7 +23,7 @@
                 <p class="title m-0">
                     ${dto.title}
                 </p>
-                <a href="javascript:btnFinished(${dto.tno})" class="btn_finished
+                <a href="/todo/finished?tno=${dto.tno}" class="btn_finished
                     <c:if test="${dto.finished == true}"> active</c:if> ">
                 </a>
             </div>
@@ -36,25 +36,7 @@
         </div>
     </div>
     <script>
-        function btnFinished(e){
 
-            console.log(e);
-            $.ajax({
-                url:'/api/finished?tno='+e,
-                type:'get',
-                dataType:'json',
-                async:false,
-                data : {tno: e},
-                success:function(data){
-                    console.log("success")
-                    console.log("response : "+data);
-
-                },
-                error:function(data){
-                    console.log(data);
-                }
-            });
-        }
     </script>
 
 </section>
